@@ -32,7 +32,7 @@ def create_app():
     app.config['MAIL_PORT'] = 587
     app.config['MAIL_USE_TLS'] = True
     # আপনার Gmail ইউজারনেম এবং App Password এখানে দিন
-    app.config['MAIL_USERNAME'] = 'rajadkumar70@gmail.com' 
+    app.config['MAIL_USERNAME'] = 'rajadkumar70@gmail.com'  
     app.config['MAIL_PASSWORD'] = 'tsii gwxb noki bkov' # Google App Password
     app.config['MAIL_DEFAULT_SENDER'] = 'rajadkumar70@gmail.com'
     
@@ -61,6 +61,8 @@ def create_app():
 
     return app
 
+# --- Gunicorn-এর জন্য এই লাইনটি যোগ করা হয়েছে ---
+app = create_app()
+
 if __name__ == '__main__':
-    app = create_app()
     app.run(debug=True)
