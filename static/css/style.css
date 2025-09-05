@@ -1,0 +1,157 @@
+/* ==========================================================================
+   1. General & Body Styles
+   ========================================================================== */
+body {
+    background-color: #f8f9fc; /* Default background for app pages like Dashboard */
+    font-family: Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.card {
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .15) !important;
+}
+
+/* ==========================================================================
+   2. Authentication Pages (Login, Register, etc.)
+   ========================================================================== */
+
+/* Apply full height only to auth pages */
+.auth-page, .auth-page body, .auth-page html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Hide Navbar and Footer on Auth Pages */
+.auth-page .navbar,
+.auth-page .footer {
+    display: none;
+}
+
+/* Remove default container padding on auth pages */
+.auth-page .container.mt-4 {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+}
+
+/* Animated Gradient Background */
+.login-page-background {
+    width: 100vw;
+    height: 100vh;
+    color: #fff;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient-animation 15s ease infinite;
+    position: relative;
+}
+
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Form Centering Container */
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+/* Auth Card Styling */
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+}
+
+.login-card .card-body {
+    padding: 2.5rem;
+}
+
+.login-logo h2 {
+    color: #333;
+}
+
+/* Auth Form Element Styling */
+.auth-page .form-control {
+    padding: 0.9rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ced4da;
+    background-color: #f8f9fa;
+}
+
+.auth-page .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-color: #86b7fe;
+    background-color: #fff;
+}
+
+.auth-page .btn {
+    padding: 0.9rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.auth-page .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+}
+
+/* ==========================================================================
+   3. Dashboard & Main App Styles
+   ========================================================================== */
+
+.page-header .page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #4e73df;
+}
+
+.stat-card {
+    border: none;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.stat-card .card-body {
+    padding: 1.25rem;
+}
+
+.stat-card .text-xs {
+    font-size: .8rem;
+}
+
+.stat-card .text-gray-300 {
+    color: #dddfeb !important;
+}
+
+.stat-card .text-gray-800 {
+    color: #5a5c69 !important;
+}
+
+.border-left-primary { border-left: .25rem solid #4e73df !important; }
+.border-left-success { border-left: .25rem solid #1cc88a !important; }
+.border-left-info { border-left: .25rem solid #36b9cc !important; }
+.border-left-warning { border-left: .25rem solid #f6c23e !important; }

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Add Customer{% endblock %}
+{% block content %}
+<h2>Add New Customer</h2>
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Customer Name</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" name="phone" required>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea class="form-control" name="address" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Save Customer</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Reports{% endblock %}
+{% block content %}
+<h2>Sales & Profit Report</h2>
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">Total Sales (Grand Total)</div>
+            <div class="card-body">
+                <h4 class="card-title">{{ "%.2f"|format(total_sales) }} BDT</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-header">Total Cost of Goods Sold</div>
+            <div class="card-body">
+                <h4 class="card-title">{{ "%.2f"|format(total_cost) }} BDT</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-header">Gross Profit</div>
+            <div class="card-body">
+                <h4 class="card-title">{{ "%.2f"|format(profit) }} BDT</h4>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

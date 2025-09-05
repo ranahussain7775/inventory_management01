@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Suppliers{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>All Suppliers</h2>
+    <a href="{{ url_for('app_routes.add_supplier') }}" class="btn btn-primary">+ Add New Supplier</a>
+</div>
+<div class="card">
+    <div class="card-body">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Contact Person</th>
+                    <th>Phone</th>
+                    <th>Total Due (BDT)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for supplier in suppliers %}
+                <tr>
+                    <td>{{ supplier.name }}</td>
+                    <td>{{ supplier.contact_person }}</td>
+                    <td>{{ supplier.phone }}</td>
+                    <td>{{ "%.2f"|format(supplier.total_due) }}</td>
+                    <td>
+                        <a href="{{ url_for('app_routes.supplier_details', supplier_id=supplier.id) }}" class="btn btn-sm btn-info">View Details</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

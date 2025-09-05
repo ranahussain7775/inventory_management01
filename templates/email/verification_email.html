@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Email</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px;">
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td align="center">
+                <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden;">
+                    
+                    <tr>
+                        <td align="center" style="background-color: #0d6efd; padding: 20px;">
+                            <h1 style="color: #ffffff; margin: 0; font-size: 24px;">Inventory Pro</h1>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 40px 30px;">
+                            <h2 style="color: #333333; margin-top: 0;">Welcome!</h2>
+                            <p style="color: #555555; font-size: 16px; line-height: 1.5;">
+                                Thank you for registering. Please use the verification code below or click the button to confirm your email address.
+                            </p>
+                            
+                            <div style="text-align: center; margin: 30px 0;">
+                                <span style="display: inline-block; background-color: #e9ecef; font-size: 28px; font-weight: bold; color: #333; padding: 12px 24px; border-radius: 5px; letter-spacing: 5px;">
+                                    {{ otp_code }}
+                                </span>
+                            </div>
+
+                            <p style="color: #555555; font-size: 16px; line-height: 1.5; text-align: center;">
+                                Alternatively, you can click the button below:
+                            </p>
+
+                            <div style="text-align: center; margin-top: 20px;">
+                                <a href="{{ link }}" target="_blank" style="background-color: #0d6efd; color: #ffffff; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-size: 16px; font-weight: bold;">
+                                    Verify Email Address
+                                </a>
+                            </div>
+
+                            <p style="color: #777777; font-size: 14px; line-height: 1.5; margin-top: 40px;">
+                                If you did not create an account, no further action is required. This code will expire in 10 minutes.
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" style="background-color: #f4f4f4; padding: 20px; font-size: 12px; color: #888888;">
+                            &copy; 2025 Inventory Pro. All rights reserved.
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

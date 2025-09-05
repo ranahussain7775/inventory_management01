@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Customers{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>All Customers</h2>
+    <a href="{{ url_for('app_routes.add_customer') }}" class="btn btn-primary">+ Add New Customer</a>
+</div>
+<div class="card">
+    <div class="card-body">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.phone }}</td>
+                    <td>{{ customer.address }}</td>
+                    <td class="d-flex gap-2">
+                    <a href="{{ url_for('app_routes.customer_details', customer_id=customer.id) }}" class="btn btn-sm btn-info">View Orders</a>
+    
+                    <form method="POST" action="{{ url_for('app_routes.delete_customer', customer_id=customer.id) }}">
+                 <button type="submit" class="btn btn-sm btn-danger" 
+                onclick="return confirm('আপনি কি নিশ্চিতভাবে এই কাস্টমারকে ডিলিট করতে চান? তার সমস্ত অর্ডার স্থায়ীভাবে মুছে যাবে।');">
+            Delete
+        </button>
+    </form>
+</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
