@@ -1,6 +1,8 @@
+# inventory_management/ui/web_app.py
+
 from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
 from flask_login import login_user, logout_user, login_required, current_user
-from extensions import db
+from extensions import db, mail # <-- This import has been changed
 from models.user import User
 from models.product import Product
 from models.supplier import Supplier, SupplierPayment
@@ -12,7 +14,7 @@ import random
 from werkzeug.utils import secure_filename
 
 # নতুন ফিচারগুলোর জন্য প্রয়োজনীয় ইম্পোর্ট
-from main import mail
+# from main import mail <-- This incorrect line is removed
 from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 
@@ -207,15 +209,15 @@ def dashboard():
     recent_products = Product.query.filter_by(user_id=current_user.id).order_by(Product.id.desc()).limit(5).all()
 
     return render_template('dashboard.html', 
-                           total_products=total_products,
-                           low_stock_count=len(low_stock_products),
-                           low_stock_products=low_stock_products,
-                           total_suppliers=total_suppliers,
-                           total_customers=total_customers,
-                           chart_labels=chart_labels,
-                           chart_data=chart_data,
-                           recent_products=recent_products
-                           )
+                                total_products=total_products,
+                                low_stock_count=len(low_stock_products),
+                                low_stock_products=low_stock_products,
+                                total_suppliers=total_suppliers,
+                                total_customers=total_customers,
+                                chart_labels=chart_labels,
+                                chart_data=chart_data,
+                                recent_products=recent_products
+                                )
 
 # ==============================================================================
 # --- Product Routes ---
@@ -506,4 +508,5 @@ def reports():
             total_cost_of_goods += item.quantity * item.product.buy_price_per_pcs
             
     profit = total_sales - total_cost_of_goods
+
     return render_template('reports.html', total_sales=total_sales, total_cost=total_cost_of_goods, profit=profit)
