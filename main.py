@@ -13,7 +13,7 @@ def create_app():
     def inject_year():
         return {'current_year': datetime.utcnow().year}
 
-    # User loader function
+    # User loader function is imported inside the factory to avoid circular imports
     from models.user import User
 
     # Configuration
@@ -29,7 +29,6 @@ def create_app():
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
     app.config['MAIL_PORT'] = 587
     app.config['MAIL_USE_TLS'] = True
-    # আপনার Gmail ইউজারনেম এবং App Password এখানে দিন
     app.config['MAIL_USERNAME'] = 'rajadkumar70@gmail.com'  
     app.config['MAIL_PASSWORD'] = 'tsii gwxb noki bkov' # Google App Password
     app.config['MAIL_DEFAULT_SENDER'] = 'rajadkumar70@gmail.com'
@@ -43,24 +42,24 @@ def create_app():
     login_manager.login_message_category = 'info'
 
     # User loader function
-    from models.user import User
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
 
-    # Blueprint রেজিস্টার করা
+    # Blueprint Registration
     from ui.web_app import app_routes
     app.register_blueprint(app_routes)
 
-    # অ্যাপ Context এর মধ্যে ডাটাবেস টেবিল তৈরি করা
+    # Create database tables within app context
     with app.app_context():
         db.create_all()
         print("Database tables created successfully.")
 
     return app
 
-# --- Gunicorn-এর জন্য এই লাইনটি যোগ করা হয়েছে ---
+# --- This line makes the app runnable for Gunicorn ---
 app = create_app()
 
+# This block is for local development only
 if __name__ == '__main__':
     app.run(debug=True)
