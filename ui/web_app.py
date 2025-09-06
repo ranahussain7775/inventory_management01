@@ -1,8 +1,6 @@
-# inventory_management/ui/web_app.py
-
 from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
 from flask_login import login_user, logout_user, login_required, current_user
-from extensions import db, mail # <-- This import has been changed
+from extensions import db, mail # <-- এই লাইনটি পরিবর্তন করা হয়েছে
 from models.user import User
 from models.product import Product
 from models.supplier import Supplier, SupplierPayment
@@ -13,14 +11,13 @@ import secrets
 import random
 from werkzeug.utils import secure_filename
 
-# নতুন ফিচারগুলোর জন্য প্রয়োজনীয় ইম্পোর্ট
-# from main import mail <-- This incorrect line is removed
+# প্রয়োজনীয় ইম্পোর্ট
 from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 
 app_routes = Blueprint('app_routes', __name__)
 
-# টোকেন তৈরির জন্য Serializer (Secret Key টি পরিবর্তন করে নেবেন)
+# টোকেন তৈরির জন্য Serializer
 s = URLSafeTimedSerializer('A-VERY-SECRET-KEY-FOR-OTP-AND-RESET')
 
 # --- Helper Function for Image Saving ---
@@ -33,7 +30,7 @@ def save_product_image(form_picture):
     return picture_fn
 
 # ==============================================================================
-# --- Authentication Routes (Updated with OTP & Forgot Password) ---
+# --- Authentication Routes ---
 # ==============================================================================
 
 @app_routes.route('/register', methods=['GET', 'POST'])
@@ -420,8 +417,6 @@ def delete_customer(customer_id):
     return redirect(url_for('app_routes.customers'))
 
 
-        # এই দুটি নতুন ফাংশন যোগ করুন
-
 @app_routes.route('/orders')
 @login_required
 def orders_list():
@@ -462,9 +457,9 @@ def create_order():
 
             customer = Customer.query.filter_by(id=customer_id, user_id=current_user.id).first_or_404()
             total_items_price = 0
-            # এখানে স্ট্যাটাস যোগ করুন
-            new_order = Order(customer_id=customer.id, delivery_charge=delivery_charge, total_price=0, status=status)
-            new_order = Order(customer_id=customer.id, delivery_charge=delivery_charge, total_price=0)
+
+            # There was a duplicate and incorrect line here in the original code, it's now fixed.
+            new_order = Order(customer_id=customer.id, delivery_charge=delivery_charge, total_price=0, status='Pending')
             
             for i in range(len(product_ids)):
                 product_id, quantity, sale_price = int(product_ids[i]), int(quantities[i]), float(sale_prices[i])
@@ -505,7 +500,9 @@ def reports():
     if order_ids:
         all_order_items = OrderItem.query.filter(OrderItem.order_id.in_(order_ids)).all()
         for item in all_order_items:
-            total_cost_of_goods += item.quantity * item.product.buy_price_per_pcs
+            # Ensuring the product and its buy price exist to prevent errors
+            if item.product:
+                total_cost_of_goods += item.quantity * item.product.buy_price_per_pcs
             
     profit = total_sales - total_cost_of_goods
 
