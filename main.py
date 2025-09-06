@@ -1,13 +1,11 @@
 # inventory_management/main.py
 
 from flask import Flask
-from extensions import db, login_manager
-from flask_mail import Mail
+from extensions import db, login_manager, mail # <-- mail is now imported from extensions
 import os
 from datetime import datetime
 
-# Mail অবজেক্ট তৈরি করা
-mail = Mail()
+# The old mail object creation is removed from here
 
 def create_app():
     app = Flask(__name__)
@@ -27,7 +25,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # --- Flask-Mail Configuration (নতুন অংশ) ---
+    # --- Flask-Mail Configuration ---
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
     app.config['MAIL_PORT'] = 587
     app.config['MAIL_USE_TLS'] = True
@@ -39,7 +37,7 @@ def create_app():
     # Extensions Initialization
     db.init_app(app)
     login_manager.init_app(app)
-    mail.init_app(app) # অ্যাপের সাথে mail অবজেক্টটি যুক্ত করা
+    mail.init_app(app) # Initializes the mail object imported from extensions
 
     login_manager.login_view = 'app_routes.login'
     login_manager.login_message_category = 'info'
